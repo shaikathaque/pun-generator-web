@@ -5,8 +5,8 @@ var puns = [{question: 'Why can\'t bicycles stand up on their own?', answer: 'be
             {question: 'Who makes the most comfortable shoes?', answer: 'softwear developers'},
             {question: 'What did the mother tomato say to its child?', answer: 'ketchup!'}];
 
-app.listen(8080, function() {
-  console.log('Pun Generator listening on port: 8080');
+app.listen(process.env.PORT || 8080, function() {
+  console.log('Pun Generator listening');
 });
 
 app.get('/', function(req, res) {
