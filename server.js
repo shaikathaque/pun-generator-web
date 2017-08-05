@@ -1,6 +1,7 @@
 const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser')
+const path = require('path');
 
 const db = require('./db/config');
 const Pun = require('./db/model/pun');
@@ -13,7 +14,7 @@ app.listen(process.env.PORT || 8000, function() {
 
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/client/build'));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -27,10 +28,10 @@ app.all('/', function(req, res, next) {
   next();
  });
 
-app.get('/', function(req, res) {
-  // res.redirect('/pun');
-  console.log('hello');
-});
+// app.get('/', function(req, res) {
+//   // res.redirect('/pun');
+//   console.log('hello');
+// });
 
 app.get('/pun', function(req, res) {
 
@@ -63,6 +64,10 @@ app.post('/submitPun', function(req, res) {
       res.send(pun);
     }
   });
+});
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 function getRandomInt(max) {
