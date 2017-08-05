@@ -1,16 +1,10 @@
 var mongoose = require('mongoose');
 
-// mongoose.connect('mongo://localhost/pun-generator-db');
-// var db = mongoose.connection;
-
-// mongoURI = 'mongodb://localhost/pun-generator-db';
-
 if (process.env.MONGODB_URI) {
   mongoURI = process.env.MONGODB_URI;
 } else {
   mongoURI = 'mongodb://localhost/pun-generator-db';
 }
-
 
 mongoose.connect(mongoURI);
 
