@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 // mongoose.connect('mongo://localhost/pun-generator-db');
 // var db = mongoose.connection;
 
-mongoURI = 'mongodb://localhost/pun-generator-db';
+//mongodb://heroku_0nz2bvfs:o2a45s05k6c8jtbovq7h9ghekc@ds135983.mlab.com:35983/heroku_0nz2bvfs
+// mongoURI = 'mongodb://localhost/pun-generator-db';
+mongoURI = 'mongodb://heroku_0nz2bvfs:o2a45s05k6c8jtbovq7h9ghekc@ds135983.mlab.com:35983/heroku_0nz2bvfs';
+
 mongoose.connect(mongoURI);
 
 var db = mongoose.connection;
