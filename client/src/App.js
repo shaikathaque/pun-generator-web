@@ -63,7 +63,7 @@ export default App;
 //helper function
 
 var getPun = (cb) => {
-  $.get('https://pun-generator.herokuapp.com/', function(data) {
+  $.get('https://pun-generator.herokuapp.com/pun', function(data) {
   })
   .done( (data) => {
     cb.call(this, data);
