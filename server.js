@@ -2,16 +2,18 @@ const request = require('request');
 const express = require('express');
 const bodyParser = require('body-parser')
 
-const db = require('./db/config');
-const Pun = require('./db/model/pun');
+// const db = require('./db/config');
+// const Pun = require('./db/model/pun');
 
 const app = express();
 
-app.listen(process.env.PORT || 8080, function() {
-  console.log('Pun Generator listening');
+app.listen(process.env.PORT || 8000, function() {
+  console.log('Pun Generator listening haha');
 });
 
 app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/client/build'));
 
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,7 +28,8 @@ app.all('/', function(req, res, next) {
  });
 
 app.get('/', function(req, res) {
-  res.redirect('/pun');
+  // res.redirect('/pun');
+  console.log('hello');
 });
 
 app.get('/pun', function(req, res) {
