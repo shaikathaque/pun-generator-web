@@ -1,6 +1,5 @@
 import React from 'react';
 import './Question.css';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
 var Question = (props) => {
   return (
