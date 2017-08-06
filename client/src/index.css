@@ -1,5 +1,19 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
+
+html {
+  height: 100%;
+  background: linear-gradient(to bottom,#654a86,#534292);
+}
+
+/*
+background: linear-gradient(180deg,#66a5ff,#0069ff); digital ocean
+
+background: linear-gradient(to bottom,#654a86,#534292); heroku
+
+background: #FFFC00; snapchat
+
+*/
