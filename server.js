@@ -28,10 +28,16 @@ app.all('/', function(req, res, next) {
   next();
  });
 
-// app.get('/', function(req, res) {
-//   // res.redirect('/pun');
-//   console.log('hello');
-// });
+ app.all('/submitPun', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
+
+app.get('/', function(req, res) {
+  // res.redirect('/pun');
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.get('/pun', function(req, res) {
 
@@ -66,9 +72,9 @@ app.post('/submitPun', function(req, res) {
   });
 });
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', function(req, res) {
+
+// });
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
