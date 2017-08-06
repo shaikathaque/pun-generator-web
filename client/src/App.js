@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 import './App.css';
 
 import Question from './Question';
 import Answer from './Answer';
 import NextPun from './NextPun';
+import TopBar from './TopBar';
 
 import $ from 'jquery';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#673AB7',
+  },
+  appBar: {
+    height: 50,
+  },
+  raisedButton: {
+      primaryColor: '#9575CD',
+    },
+});
 
 class App extends Component {
 
@@ -48,11 +64,19 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <TopBar />
+        </MuiThemeProvider>
+
         <Question question={this.state.question}/>
+
         <Answer answer={this.state.showAnswer === true ? this.state.answer : 'Click here to Reveal Answer'}
           handleShowAnswerClick={this.handleShowAnswerClick.bind(this)}
         />
-        <NextPun handleNextPunClick={this.handleNextPunClick.bind(this)}/>
+
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <NextPun handleNextPunClick={this.handleNextPunClick.bind(this)}/>
+        </MuiThemeProvider>
       </div>
     );
   }

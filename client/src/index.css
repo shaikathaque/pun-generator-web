@@ -2,14 +2,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  background: #FAFAFA;
 }
 
 html {
-  height: 100%;
-  background: linear-gradient(to bottom,#654a86,#534292);
+
 }
 
 /*
+height: 100%;
+
 background: linear-gradient(180deg,#66a5ff,#0069ff); digital ocean
 
 background: linear-gradient(to bottom,#654a86,#534292); heroku
