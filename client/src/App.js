@@ -31,7 +31,8 @@ class App extends Component {
     this.state = {
       question: 'Question',
       answer: 'Answer',
-      showAnswer: false
+      showAnswer: false,
+      dialogOpen: false
     }
   }
 
@@ -47,7 +48,8 @@ class App extends Component {
     console.log('handleShowAnswerClick called')
     this.setState({
       showAnswer: true,
-      answer: this.state.answer
+      answer: this.state.answer,
+      dialogOpen: true
     });
   }
 
@@ -56,9 +58,16 @@ class App extends Component {
       this.setState({
         question: data.question,
         answer: data.answer,
-        showAnswer: false
+        showAnswer: false,
+        dialogOpen: false
       });
     });
+  }
+
+  handleCloseDialog() {
+    this.setState({
+      dialogOpen: false
+    })
   }
 
   render() {
@@ -70,9 +79,13 @@ class App extends Component {
 
         <Question question={this.state.question}/>
 
-        <Answer answer={this.state.showAnswer === true ? this.state.answer : 'Click here to Reveal Answer'}
-          handleShowAnswerClick={this.handleShowAnswerClick.bind(this)}
-        />
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <Answer answer={this.state.showAnswer === true ? this.state.answer : 'Click here to Reveal Answer'}
+            handleShowAnswerClick={this.handleShowAnswerClick.bind(this)}
+            dialogOpenState={this.state.dialogOpen}
+            handleCloseDialog={this.handleCloseDialog.bind(this)}
+          />
+        </MuiThemeProvider>
 
         <MuiThemeProvider muiTheme={muiTheme}>
           <NextPun handleNextPunClick={this.handleNextPunClick.bind(this)}/>
