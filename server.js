@@ -54,11 +54,10 @@ app.get('/pun', function(req, res) {
 
 app.post('/submitPun', function(req, res) {
 
+  console.log(req.body);
+
   var newQuestion = req.body.question;
   var newAnswer = req.body.answer;
-
-  console.log('question: ', req.body.question);
-  console.log('answer: ', req.body.answer);
 
   var newPun = new Pun({
     question: newQuestion,
