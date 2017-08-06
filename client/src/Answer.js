@@ -1,8 +1,8 @@
 import React from 'react';
-import './Answer.css';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 
+import './Answer.css';
 
 var Answer = (props) => {
 
