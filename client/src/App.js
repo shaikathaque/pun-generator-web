@@ -12,6 +12,7 @@ import SubmitPun from './SubmitPun';
 
 import './App.css';
 import $ from 'jquery';
+import axios from 'axios';
 
 class App extends Component {
 
@@ -141,15 +142,25 @@ export default App;
 //helper functions
 
 var getPun = (cb) => {
-  $.get('https://pun-generator.herokuapp.com/pun', function(data) {
-  })
-  .done( (data) => {
-    cb.call(this, data);
-  })
-  .fail( (response) => {
-    console.log(response);
-  });
+  axios.get('https://pun-generator.herokuapp.com/pun')
+    .then( (response) => {
+      cb.call(this, response.data);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
 };
+
+// var getPun = (cb) => {
+//   $.get('https://pun-generator.herokuapp.com/pun', function(data) {
+//   })
+//   .done( (data) => {
+//     cb.call(this, data);
+//   })
+//   .fail( (response) => {
+//     console.log(response);
+//   });
+// };
 
 var submitPun = (userQuestion, userAnswer, cb) => {
 
