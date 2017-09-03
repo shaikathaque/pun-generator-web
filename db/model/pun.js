@@ -7,5 +7,4 @@ var punSchema = mongoose.Schema({
 });
 
 var Pun = mongoose.model('Pun', punSchema);
-
 module.exports = Pun;
