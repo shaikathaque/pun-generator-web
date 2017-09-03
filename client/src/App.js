@@ -138,8 +138,9 @@ const muiTheme = getMuiTheme({
 export default App;
 
 var getPun = (cb) => {
-  axios.get('https://pun-generator.herokuapp.com/pun')
+  axios.get('/pun')
     .then((response) => {
+      console.log(response);
       cb.call(this, response.data);
     })
     .catch((error) => {
@@ -149,12 +150,12 @@ var getPun = (cb) => {
 
 var submitPun = (userQuestion, userAnswer, cb) => {
 
-  var pun = {
+  let pun = {
     question: userQuestion,
     answer: userAnswer
   }
 
-  axios.post('https://pun-generator.herokuapp.com/submitPun', pun)
+  axios.post('/submitPun', pun)
     .then((response) => {
       cb(response.data);
     })
