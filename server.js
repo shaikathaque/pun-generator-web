@@ -1,46 +1,29 @@
 const request = require('request');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan'); 
 
 const db = require('./db/config');
 const Pun = require('./db/model/pun');
 
 const app = express();
+const PORT = process.env.PORT || 8000;
 
-app.listen(process.env.PORT || 8000, function() {
-  console.log('Pun Generator listening haha');
+app.use(morgan('tiny'));
+
+app.listen(PORT, function() {
+  console.log('Pun Generator listening on port:', PORT);
 });
 
 app.use(bodyParser.json());
-
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
-
- app.all('/pun', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
-
- app.all('/submitPun', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  next();
- });
-
 app.get('/', function(req, res) {
-  // res.redirect('/pun');
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 app.get('/pun', function(req, res) {
-
   Pun.find({}).exec(function(err, puns) {
     if (err) {
       res.sendStatus(404);
@@ -49,17 +32,13 @@ app.get('/pun', function(req, res) {
       res.send(randomPun);
     }
   });
-
 });
 
 app.post('/submitPun', function(req, res) {
+  let newQuestion = req.body.question;
+  let newAnswer = req.body.answer;
 
-  console.log(req.body);
-
-  var newQuestion = req.body.question;
-  var newAnswer = req.body.answer;
-
-  var newPun = new Pun({
+  let newPun = new Pun({
     question: newQuestion,
     answer: newAnswer
   });
@@ -73,10 +52,6 @@ app.post('/submitPun', function(req, res) {
     }
   });
 });
-
-// app.get('*', function(req, res) {
-
-// });
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
