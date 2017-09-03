@@ -11,7 +11,6 @@ import TopBar from './TopBar';
 import SubmitPun from './SubmitPun';
 
 import './App.css';
-import $ from 'jquery';
 import axios from 'axios';
 
 class App extends Component {
