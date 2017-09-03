@@ -38,7 +38,6 @@ class App extends Component {
   }
 
   handleShowAnswerClick() {
-    console.log('handleShowAnswerClick called')
     this.setState({
       showAnswer: true,
       answer: this.state.answer,
@@ -139,28 +138,15 @@ const muiTheme = getMuiTheme({
 
 export default App;
 
-//helper functions
-
 var getPun = (cb) => {
   axios.get('https://pun-generator.herokuapp.com/pun')
-    .then( (response) => {
+    .then((response) => {
       cb.call(this, response.data);
     })
-    .catch( (error) => {
+    .catch((error) => {
       console.log(error);
     });
 };
-
-// var getPun = (cb) => {
-//   $.get('https://pun-generator.herokuapp.com/pun', function(data) {
-//   })
-//   .done( (data) => {
-//     cb.call(this, data);
-//   })
-//   .fail( (response) => {
-//     console.log(response);
-//   });
-// };
 
 var submitPun = (userQuestion, userAnswer, cb) => {
 
@@ -169,17 +155,11 @@ var submitPun = (userQuestion, userAnswer, cb) => {
     answer: userAnswer
   }
 
-  $.ajax({
-    type: 'POST',
-    url: "https://pun-generator.herokuapp.com/submitPun",
-    data: JSON.stringify(pun),
-    contentType: 'application/json',
-    success: function(data) {
-      console.log(data);
-      cb(data);
-    },
-    error: function(err) {
-      console.log(err);
-    }
-  });
+  axios.post('https://pun-generator.herokuapp.com/submitPun', pun)
+    .then((response) => {
+      cb(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
