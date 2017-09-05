@@ -6,6 +6,7 @@ const morgan = require('morgan');
 
 const db = require('./db/config');
 const Pun = require('./db/model/pun');
+const routes = require('./server/routes');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -23,18 +24,9 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-app.get('/pun', function(req, res) {
-  Pun.find({}).exec(function(err, puns) {
-    if (err) {
-      res.sendStatus(404);
-    } else {
-      var randomPun = puns[getRandomInt(puns.length)];
-      res.send(randomPun);
-    }
-  });
-});
+app.get('/pun', routes.getPuns);
 
-app.post('/submitPun', function(req, res) {
+app.post('/pun', function(req, res) {
   let newQuestion = req.body.question;
   let newAnswer = req.body.answer;
 
@@ -53,6 +45,7 @@ app.post('/submitPun', function(req, res) {
   });
 });
 
+//TODO remove
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
