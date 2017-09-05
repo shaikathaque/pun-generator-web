@@ -10,7 +10,6 @@ const routes = {
   getPun: (req, res) => {
     Pun.find({}).exec()
       .then( (puns) => {
-        console.log('from routes.js')
         var randomPun = puns[getRandomInt(puns.length)];
         res.send(randomPun);
       })
@@ -20,7 +19,6 @@ const routes = {
   },
 
   addPun: (req, res) => {
-    console.log('addPun from routes.js');
     let newQuestion = req.body.question;
     let newAnswer = req.body.answer;
   
