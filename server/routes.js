@@ -8,17 +8,17 @@ function getRandomInt(max) {
 
 const routes = {
 	getPun: (req, res) => {
-		Pun.find({}).exec(function(err, puns) {
-			if (err) {
-				res.sendStatus(404);
-			} else {
+		Pun.find({}).exec()
+			.then( (puns) => {
 				console.log('from routes.js')
 				var randomPun = puns[getRandomInt(puns.length)];
 				res.send(randomPun);
-			}
-		});
+			})
+			.catch( (err) => {
+				res.sendStatus(404);
+			});	
 	},
-	
+
 	addPun: (req, res) => {
 		console.log('addPun from routes.js');
 		let newQuestion = req.body.question;
@@ -29,14 +29,9 @@ const routes = {
 			answer: newAnswer
 		});
 	
-		newPun.save(function(err, pun) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log(pun);
-				res.send(pun);
-			}
-		});
+		newPun.save()
+			.then( (pun) => res.send(pun))
+			.catch(console.error);
 	}
 }
 
