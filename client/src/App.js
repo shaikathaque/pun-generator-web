@@ -138,7 +138,7 @@ const muiTheme = getMuiTheme({
 export default App;
 
 var getPun = (cb) => {
-  axios.get('/puns')
+  axios.get('/pun')
     .then((response) => {
       console.log(response);
       cb.call(this, response.data);
@@ -155,7 +155,7 @@ var submitPun = (userQuestion, userAnswer, cb) => {
     answer: userAnswer
   }
 
-  axios.post('/puns', pun)
+  axios.post('/pun', pun)
     .then((response) => {
       cb(response.data);
     })
